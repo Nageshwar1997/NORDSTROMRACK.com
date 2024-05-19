@@ -7,13 +7,16 @@ import Logo from "./Logo";
 import { HiSearch } from "react-icons/hi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="h-16 shadow-md">
+    <header className="h-16 shadow-md bg-white">
       <div className="h-full container mx-auto flex items-center px-4 justify-between">
         <div className="cursor-pointer">
-          <Logo w={140} h={50} />
+          <Link to="/">
+            <Logo w={140} h={50} />
+          </Link>
         </div>
         <div className="hidden lg:flex items-center w-full justify-between max-w-xl rounded-full focus-within:shadow-md">
           <input
@@ -38,9 +41,12 @@ const Header = () => {
             </span>
           </div>
           <div className="cursor-pointer">
-            <button className="px-4 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700">
+            <Link
+              to={"/login"}
+              className="px-4 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700"
+            >
               Login
-            </button>
+            </Link>
           </div>
         </div>
       </div>
