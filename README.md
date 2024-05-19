@@ -19,5 +19,8 @@ module.exports = {
 }`
 
 ### React Router DOM
-
 npm install react-router-dom
+
+
+### React Icons
+npm install react-icons --save
