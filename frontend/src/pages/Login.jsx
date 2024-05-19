@@ -19,11 +19,11 @@ const Login = () => {
     const { name, value } = e.target;
     setData((prev) => ({ ...prev, [name]: value }));
   };
-  console.log("Data Login :", data);
+  // console.log("Data Login :", data);
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submit Data Login :", data);
+    // console.log("Submit Data Login :", data);
 
   };
   return (
