@@ -1,8 +1,15 @@
 import React from 'react'
+import Logo from "./Logo"
 
 const Header = () => {
   return (
-    <div>Header</div>
+      <header className='h-16 shadow-md'>
+          <div className="h-full container mx-auto">
+              <div className="">
+                  <Logo w={90} h={50} />
+              </div>
+          </div>
+    </header>
   )
 }
 
