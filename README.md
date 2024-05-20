@@ -49,3 +49,9 @@ replace package.json with below text
 
 ### Install nodemon, express, cors, dotenv, mongoose
 npm i nodemon express cors dotenv mongoose
+
+### Install MongoDB
+npm install mongodb
+
+### Install bcrypt
+npm i bcryptjs
