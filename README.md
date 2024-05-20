@@ -66,3 +66,7 @@ npm i bcryptjs
 ### Install JSON Web Token
 
 npm i jsonwebtoken
+
+### Install Cookie-Parser
+
+npm i cookie-parser
