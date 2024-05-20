@@ -21,9 +21,10 @@ function App() {
       method: SummaryApi.current_user.method,
       credentials: "include",
     });
+    // console.log("Data Response :", dataResponse);
 
     const dataApi = await dataResponse.json();
-    console.log("Data User :", dataResponse);
+    console.log("Data Api :", dataApi);
   };
   useEffect(() => {
     // user Details;

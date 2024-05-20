@@ -4,8 +4,8 @@
 
 ### Tailwind CSS
 
-npm install -D tailwindcss
-npx tailwindcss init
+`npm install -D tailwindcss`
+`npx tailwindcss init`
 
 `/** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -20,21 +20,25 @@ module.exports = {
 
 ### React Router DOM
 
-npm install react-router-dom
+`npm install react-router-dom`
 
 ### React Icons
 
-npm install react-icons --save
+`npm install react-icons --save`
 
 ### Install Toast
 
-npm i react-toastify
+`npm i react-toastify`
+
+### React Redux Toolkit
+
+`npm install @reduxjs/toolkit`
 
 # Backend Installation
 
 ### Install Backend
 
-npm init
+`npm init`
 
 replace package.json with below text
 `{
@@ -53,20 +57,20 @@ replace package.json with below text
 
 ### Install nodemon, express, cors, dotenv, mongoose
 
-npm i nodemon express cors dotenv mongoose
+`npm i nodemon express cors dotenv mongoose`
 
 ### Install MongoDB
 
-npm install mongodb
+`npm install mongodb`
 
 ### Install bcrypt
 
-npm i bcryptjs
+`npm i bcryptjs`
 
 ### Install JSON Web Token
 
-npm i jsonwebtoken
+`npm i jsonwebtoken`
 
 ### Install Cookie-Parser
 
-npm i cookie-parser
+`npm i cookie-parser`
