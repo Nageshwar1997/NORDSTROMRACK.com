@@ -63,8 +63,10 @@ const Login = () => {
           </div>
           <form onSubmit={handleSubmit} className="pt-6">
             <div className="grid mb-4">
-              <label htmlFor="email">Email : </label>
-              <div className="bg-slate-100 p-2">
+              <label htmlFor="email" className="mb-1">
+                Email :{" "}
+              </label>
+              <div className="bg-blue-100 p-2 inputBorderRadius">
                 <input
                   type="email"
                   name="email"
@@ -77,8 +79,10 @@ const Login = () => {
               </div>
             </div>
             <div className="grid">
-              <label htmlFor="password">Password : </label>
-              <div className="bg-slate-100 p-2 flex items-center">
+              <label htmlFor="password" className="mb-1">
+                Password :{" "}
+              </label>
+              <div className="bg-blue-100 p-2 flex items-center inputBorderRadius">
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"

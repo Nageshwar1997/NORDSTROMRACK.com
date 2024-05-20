@@ -49,7 +49,6 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Submit Data Sign Up :", data);
-    
 
     if (data.password === data.confirmPassword) {
       const dataResponse = await fetch(SummaryApi.signUp.url, {
@@ -63,7 +62,7 @@ const SignUp = () => {
       const dataApi = await dataResponse.json();
       if (dataApi.success) {
         toast.success(dataApi.message);
-        navigate("/login")
+        navigate("/login");
       }
       if (dataApi.error) {
         toast.error(dataApi.message);
@@ -89,7 +88,7 @@ const SignUp = () => {
             </div>
             <form>
               <label>
-                <div className="text-xs bg-opacity-50 bg-slate-200 pb-5 cursor-pointer pt-1 text-center absolute bottom-0 w-full">
+                <div className="text-xs bg-opacity-50 bg-blue-200 pb-5 cursor-pointer pt-1 text-center absolute bottom-0 w-full">
                   Upload Photo
                 </div>
                 <input
@@ -103,7 +102,7 @@ const SignUp = () => {
           <form onSubmit={handleSubmit} className="pt-6">
             <div className="grid mb-1">
               <label htmlFor="name">Name : </label>
-              <div className="bg-slate-100 p-2">
+              <div className="bg-blue-100 p-2 inputBorderRadius">
                 <input
                   type="text"
                   name="name"
@@ -117,7 +116,7 @@ const SignUp = () => {
             </div>
             <div className="grid mb-1">
               <label htmlFor="email">Email : </label>
-              <div className="bg-slate-100 p-2">
+              <div className="bg-blue-100 p-2 inputBorderRadius">
                 <input
                   type="email"
                   name="email"
@@ -131,7 +130,7 @@ const SignUp = () => {
             </div>
             <div className="grid mb-1">
               <label htmlFor="password">Password : </label>
-              <div className="bg-slate-100 p-2 flex items-center">
+              <div className="bg-blue-100 p-2 flex items-center inputBorderRadius">
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
@@ -151,7 +150,7 @@ const SignUp = () => {
             </div>
             <div className="grid mb-1">
               <label htmlFor="password">Confirm Password : </label>
-              <div className="bg-slate-100 p-2 flex items-center">
+              <div className="bg-blue-100 p-2 flex items-center inputBorderRadius">
                 <input
                   type={showConfirmPassword ? "text" : "password"}
                   name="confirmPassword"

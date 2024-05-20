@@ -55,16 +55,23 @@ const Header = () => {
           </div>
         </div>
         <div className="flex items-center gap-8">
-          <div className="text-3xl cursor-pointer">
-            {user?.profilePic ? (
-              <img
-                src={user?.profilePic}
-                alt={user.name}
-                className={`w-10 h-10 rounded-full`}
-              />
-            ) : (
-              <FaRegUserCircle />
-            )}
+          <div className="relative group flex justify-center">
+            <div className="text-3xl cursor-pointer">
+              {user?.profilePic ? (
+                <img
+                  src={user?.profilePic}
+                  alt={user.name}
+                  className={`w-10 h-10 rounded-full`}
+                />
+              ) : (
+                <FaRegUserCircle />
+              )}
+            </div>
+            <div className="absolute bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded-md">
+              <nav>
+                <Link to={"admin-panel"} className="whitespace-nowrap hover:bg-blue-100 rounded-sm p-1">Admin Panel</Link>
+              </nav>
+            </div>
           </div>
           <div className="text-3xl cursor-pointer relative">
             <span>
