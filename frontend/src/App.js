@@ -1,8 +1,11 @@
 // CSS
 import "./App.css";
 
-// React
+// React Router Dom
 import { Outlet } from "react-router-dom";
+
+// React
+import { useEffect } from "react";
 
 // React Toast
 import { ToastContainer } from "react-toastify";
@@ -11,11 +14,20 @@ import "react-toastify/dist/ReactToastify.css";
 // Components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { useEffect } from "react";
+
+// Helpers
 import SummaryApi from "./common";
+
+// Context
 import Context from "./context";
 
+// React Redux
+import { useDispatch } from "react-redux";
+
+import { setUserDetails } from "./store/userSlice";
+
 function App() {
+  const dispatch = useDispatch()
   const fetchUserDetails = async () => {
     const dataResponse = await fetch(SummaryApi.current_user.url, {
       method: SummaryApi.current_user.method,
@@ -24,6 +36,11 @@ function App() {
     // console.log("Data Response :", dataResponse);
 
     const dataApi = await dataResponse.json();
+
+    if (dataApi.success) {
+      dispatch(setUserDetails(dataApi.data));
+    }
+
     console.log("Data Api :", dataApi);
   };
   useEffect(() => {
