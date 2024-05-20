@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Assets
 import Logo from "./Logo";
@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { setUserDetails } from "../store/userSlice";
 
 const Header = () => {
+  const [menuDisplay, setMenuDisplay] = useState(false);
   const user = useSelector((state) => state.user?.user);
   // console.log("user header", user);
 
@@ -55,8 +56,11 @@ const Header = () => {
           </div>
         </div>
         <div className="flex items-center gap-8">
-          <div className="relative group flex justify-center">
-            <div className="text-3xl cursor-pointer">
+          <div className="relative flex justify-center">
+            <div
+              className="text-3xl cursor-pointer relative flex justify-center"
+              onClick={() => setMenuDisplay((prev) => !prev)}
+            >
               {user?.profilePic ? (
                 <img
                   src={user?.profilePic}
@@ -67,11 +71,19 @@ const Header = () => {
                 <FaRegUserCircle />
               )}
             </div>
-            <div className="absolute bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded-md">
-              <nav>
-                <Link to={"admin-panel"} className="whitespace-nowrap hover:bg-blue-100 rounded-sm p-1">Admin Panel</Link>
-              </nav>
-            </div>
+            {menuDisplay && (
+              <div className="absolute hidden md:block bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded-md">
+                <nav>
+                  <Link
+                    to={"admin-panel"}
+                    onClick={() => setMenuDisplay((prev) => !prev)}
+                    className="whitespace-nowrap hover:bg-blue-100 rounded-sm p-1"
+                  >
+                    Admin Panel
+                  </Link>
+                </nav>
+              </div>
+            )}
           </div>
           <div className="text-3xl cursor-pointer relative">
             <span>
@@ -83,12 +95,13 @@ const Header = () => {
           </div>
           <div className="cursor-pointer">
             {user?._id ? (
-              <button
+              <Link
+                to={"/login"}
                 onClick={handleLogout}
                 className="px-4 pb-2 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700"
               >
                 Logout
-              </button>
+              </Link>
             ) : (
               <Link
                 to={"/login"}
