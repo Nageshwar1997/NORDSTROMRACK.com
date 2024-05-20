@@ -48,6 +48,8 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // console.log("Submit Data Sign Up :", data);
+    
 
     if (data.password === data.confirmPassword) {
       const dataResponse = await fetch(SummaryApi.signUp.url, {

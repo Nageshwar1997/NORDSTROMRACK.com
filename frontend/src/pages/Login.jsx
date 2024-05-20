@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 // Logo
 import loginLogo from "../assets/LoginIcon.webp";
@@ -6,7 +6,15 @@ import loginLogo from "../assets/LoginIcon.webp";
 // React Icons
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-import { Link } from "react-router-dom";
+// Router
+import { Link, useNavigate } from "react-router-dom";
+
+// Helpers
+import SummaryApi from "../common";
+
+// React Toast
+import { toast } from "react-toastify";
+import Context from "../context";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,14 +23,35 @@ const Login = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
+  const { fetchUserDetails } = useContext(Context);
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setData((prev) => ({ ...prev, [name]: value }));
   };
   // console.log("Data Login :", data);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const dataResponse = await fetch(SummaryApi.signIn.url, {
+      method: SummaryApi.signIn.method,
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const dataApi = await dataResponse.json();
+    if (dataApi.success) {
+      toast.success(dataApi.message);
+      fetchUserDetails();
+      navigate("/");
+    }
+    if (dataApi.error) {
+      toast.error(dataApi.message);
+    }
     // console.log("Submit Data Login :", data);
   };
   return (
