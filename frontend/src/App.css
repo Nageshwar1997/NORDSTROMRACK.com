@@ -1,6 +1,32 @@
-.inputBorderRadius{
-    border-radius: 4px;
+.inputBorderRadius {
+  border-radius: 4px;
 }
-.customShadow{
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.customShadow {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* **** Admin Panel User Table **** */
+.userTable {
+  border-collapse: collapse;
+  margin: auto;
+  margin-top: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  @apply text-center max-w-full max-h-full;
+  & th,
+  td {
+    @apply border-solid border-gray-300 p-2 text-center;
+  }
+
+  & tr:nth-child(even) {
+    @apply bg-blue-300;
+  }
+  & tr:nth-child(odd) {
+    @apply bg-blue-50;
+  }
+  & tr:hover {
+    @apply bg-gray-300;
+  }
+  & th {
+    @apply bg-blue-700 py-3 text-white text-lg;
+  }
 }

@@ -1,7 +1,7 @@
 async function userLogoutController(req, res) {
   try {
     res.clearCookie("token");
-    res.json({
+    res.status(200).json({
       message: "Logout Successfully",
       error: false,
       success: true,
