@@ -20,11 +20,10 @@ const Login = () => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
   // console.log("Data Login :", data);
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log("Submit Data Login :", data);
-
   };
   return (
     <section id="login">
@@ -43,6 +42,7 @@ const Login = () => {
                   value={data.email}
                   placeholder="Enter Your Email"
                   onChange={handleOnChange}
+                  required
                   className="w-full h-full outline-none bg-transparent"
                 />
               </div>
@@ -56,6 +56,7 @@ const Login = () => {
                   value={data.password}
                   placeholder="Enter Your Password"
                   onChange={handleOnChange}
+                  required
                   className="w-full h-full outline-none bg-transparent"
                 />
                 <div

@@ -7,6 +7,7 @@ import signUpLogo from "../assets/LoginIcon.webp";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
+import imageTobase64 from "../helpers/imageTobase64";
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -23,11 +24,15 @@ const SignUp = () => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleUploadPic = (e) => {
+  const handleUploadPic = async (e) => {
     const file = e.target.files[0];
+    // console.log("File :", file);
 
-    console.log("File :", file);
-  }
+    const imagePic = await imageTobase64(file);
+    // console.log("Image Pic :", imagePic);
+
+    setData((prev) => ({ ...prev, profilePic: imagePic }));
+  };
 
   // console.log("Data Sign Up :", data);
 
@@ -41,14 +46,22 @@ const SignUp = () => {
         <div className="bg-white p-5 w-full max-w-sm mx-auto rounded">
           <div className="w-20 h-20 mx-auto relative overflow-hidden rounded-full">
             <div>
-              <img className="rounded-full" src={signUpLogo} alt="Login Logo" />
+              <img
+                className="rounded-full"
+                src={data.profilePic || signUpLogo}
+                alt="Login Logo"
+              />
             </div>
             <form>
               <label>
-                <div className="text-xs bg-opacity-80 bg-slate-200 pb-5 cursor-pointer pt-1 text-center absolute bottom-0 w-full">
+                <div className="text-xs bg-opacity-50 bg-slate-200 pb-5 cursor-pointer pt-1 text-center absolute bottom-0 w-full">
                   Upload Photo
                 </div>
-                <input type="file" className="hidden" onChange={handleUploadPic} />
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handleUploadPic}
+                />
               </label>
             </form>
           </div>
@@ -62,6 +75,7 @@ const SignUp = () => {
                   value={data.name}
                   placeholder="Enter Your Full Name"
                   onChange={handleOnChange}
+                  required
                   className="w-full h-full outline-none bg-transparent"
                 />
               </div>
@@ -75,6 +89,7 @@ const SignUp = () => {
                   value={data.email}
                   placeholder="Enter Your Email"
                   onChange={handleOnChange}
+                  required
                   className="w-full h-full outline-none bg-transparent"
                 />
               </div>
@@ -88,6 +103,7 @@ const SignUp = () => {
                   value={data.password}
                   placeholder="Enter Password"
                   onChange={handleOnChange}
+                  required
                   className="w-full h-full outline-none bg-transparent"
                 />
                 <div
@@ -107,6 +123,7 @@ const SignUp = () => {
                   value={data.confirmPassword}
                   placeholder="Enter Confirm Password"
                   onChange={handleOnChange}
+                  required
                   className="w-full h-full outline-none bg-transparent"
                 />
                 <div
