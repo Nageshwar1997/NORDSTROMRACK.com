@@ -8,6 +8,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
 import imageTobase64 from "../helpers/imageTobase64";
+import SummaryApi from "../common";
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -36,9 +37,25 @@ const SignUp = () => {
 
   // console.log("Data Sign Up :", data);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("Submit Data Sign Up :", data);
+
+    if (data.password === data.confirmPassword) {
+      const dataResponse = await fetch(SummaryApi.signUp.url, {
+        method: SummaryApi.signUp.method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const dataApi = await dataResponse.json();
+      console.log("Submit Data Sign Up :", dataApi);
+    } else {
+      console.log("Password and Confirm Password does not match");
+    }
+
+    // console.log("Data Sign Up :", data);
   };
   return (
     <section id="signup">
