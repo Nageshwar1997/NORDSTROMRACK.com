@@ -7,12 +7,12 @@ const initialState = {
 export const userSlice = createSlice({
   name: "user",
   initialState,
-    reducers: {
-        setUserDetails: (state, action) => {
-            state.user = action.payload
-      }
+  reducers: {
+    setUserDetails: (state, action) => {
+      state.user = action.payload;
+      // console.log(state.user)
+    },
   },
-  
 });
 
 // Action creators are generated for each case reducer function
