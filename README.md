@@ -26,6 +26,10 @@ npm install react-router-dom
 
 npm install react-icons --save
 
+### Install Toast
+
+npm i react-toastify
+
 # Backend Installation
 
 ### Install Backend
@@ -48,10 +52,17 @@ replace package.json with below text
 }`
 
 ### Install nodemon, express, cors, dotenv, mongoose
+
 npm i nodemon express cors dotenv mongoose
 
 ### Install MongoDB
+
 npm install mongodb
 
 ### Install bcrypt
+
 npm i bcryptjs
+
+### Install JSON Web Token
+
+npm i jsonwebtoken

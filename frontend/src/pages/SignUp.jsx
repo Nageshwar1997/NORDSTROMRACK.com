@@ -1,3 +1,4 @@
+// React Hooks
 import React, { useState } from "react";
 
 // Logo
@@ -6,9 +7,16 @@ import signUpLogo from "../assets/LoginIcon.webp";
 // React Icons
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-import { Link } from "react-router-dom";
+// Router
+import { Link, useNavigate } from "react-router-dom";
+
+// Helpers
 import imageTobase64 from "../helpers/imageTobase64";
 import SummaryApi from "../common";
+
+// React Toast
+import { toast } from "react-toastify";
+
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -19,6 +27,7 @@ const SignUp = () => {
     confirmPassword: "",
     profilePic: "",
   });
+  const navigate = useNavigate();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +59,14 @@ const SignUp = () => {
       });
 
       const dataApi = await dataResponse.json();
-      console.log("Submit Data Sign Up :", dataApi);
+      if (dataApi.success) {
+        toast.success(dataApi.message);
+        navigate("/login")
+      }
+      if (dataApi.error) {
+        toast.error(dataApi.message);
+      }
+      // console.log("Submit Data Sign Up :", dataApi);
     } else {
       console.log("Password and Confirm Password does not match");
     }

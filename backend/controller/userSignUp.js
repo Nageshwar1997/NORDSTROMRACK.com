@@ -9,10 +9,10 @@ async function userSignUpController(req, res) {
 
     const user = await userModel.findOne({ email });
 
-    console.log("User", user);
+    // console.log("User", user);
 
     if (user) {
-      throw new Error("User Already Exists");
+      throw new Error("User email is already exists");
     }
 
     if (!email) {
@@ -34,6 +34,7 @@ async function userSignUpController(req, res) {
 
     const payload = {
       ...req.body,
+      role: "GENERAL",
       password: hashPassword,
     };
 
@@ -44,7 +45,7 @@ async function userSignUpController(req, res) {
       data: saveUser,
       success: true,
       error: false,
-      message: "User Created Successfully",
+      message: "User Registered Successfully",
     });
   } catch (error) {
     res.json({
