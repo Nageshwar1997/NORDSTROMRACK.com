@@ -30,9 +30,13 @@ module.exports = {
 
 `npm i react-toastify`
 
-### React Redux Toolkit
+### Install React Redux Toolkit
 
 `npm install @reduxjs/toolkit`
+
+### Install MonentJS
+
+`npm install moment --save`
 
 # Backend Installation
 
