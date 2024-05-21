@@ -2,9 +2,12 @@ import React from "react";
 
 const AllProducts = () => {
   return (
-    <div className="bg-white py-2 px-4">
-      <div className="text-xl font-bold uppercase text-blue-900">
-        All Products
+    <div>
+      <div className="bg-white py-2 px-4">
+        <h1 className="text-xl font-bold uppercase text-blue-900">
+          All Products
+        </h1>
+        <button>Upload Product</button>
       </div>
     </div>
   );
