@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import productCategory from "../helpers/productCategory";
+import uploadImage from "../helpers/uploadImage";
+import DisplayImage from "./DisplayImage";
+import { MdDelete, MdOutlineDelete } from "react-icons/md";
 
 const UploadProduct = ({ onClose }) => {
   const [product, setProduct] = useState({
@@ -14,15 +17,34 @@ const UploadProduct = ({ onClose }) => {
     sellingPrice: "",
   });
 
-  const [uploadProductImageInput, setUploadProductImageInput] = useState("");
+  const [openFullScreenImage, setOpenFullScreenImage] = useState(false);
+  const [fullScreenImage, setFullScreenImage] = useState("");
 
   const handleOnChange = (e) => {};
 
-  const handleUploadProduct = (e) => {
-      const file = e.target.files[0];
-      setUploadProductImageInput(file.name)
-    console.log("File", file);
-    };
+  const handleUploadProduct = async (e) => {
+    const file = e.target.files[0];
+    const uploadImageCloudinary = await uploadImage(file);
+
+    setProduct((prev) => {
+      return {
+        ...prev,
+        productImages: [...prev.productImages, uploadImageCloudinary.url],
+      };
+    });
+  };
+  const handleDeleteProductImage = async (index) => {
+    const newProductImages = [...product.productImages];
+    newProductImages.splice(index, 1);
+
+    setProduct((prev) => {
+      return {
+        ...prev,
+        productImages: newProductImages,
+      };
+    });
+  };
+
   return (
     <div className="bg-blue-100 bg-opacity-50 fixed w-full h-full bottom-0 top-0 left-0 right-0 flex justify-center items-center">
       <div className="bg-white p-4 rounded-md w-full max-w-2xl h-full max-h-[80%] overflow-hidden">
@@ -102,16 +124,51 @@ const UploadProduct = ({ onClose }) => {
             </div>
           </label>
           <div>
-            <img
-              src=""
-              alt=""
-              width={80}
-              height={80}
-              className="bg-blue-50 border"
-            />
+            {product?.productImages[0] ? (
+              <div className="flex items-center gap-2">
+                {product.productImages.map((img, ind) => {
+                  return (
+                    <div key={img + ind} className="relative group">
+                      <img
+                        src={img}
+                        alt={img}
+                        width={80}
+                        height={80}
+                        className="bg-blue-50 border rounded cursor-pointer"
+                        onClick={() => {
+                          setOpenFullScreenImage(true);
+                          setFullScreenImage(img);
+                        }}
+                      />
+                      <div
+                        className="absolute bottom-0 right-0 p-0.5 bg-white text-red-700 rounded-full cursor-pointer hidden group-hover:block"
+                        onClick={() => {
+                          handleDeleteProductImage(ind);
+                        }}
+                      >
+                        <MdDelete />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="text-red-600 text-xs">*Please upload image</p>
+            )}
           </div>
+          <button className="px-3 py-1 bg-blue-600 text-white rounded mb-10 hover:bg-blue-700">
+            Upload Product
+          </button>
         </form>
       </div>
+      {/* **** Display Image Full Screen */}
+      {openFullScreenImage && (
+        <DisplayImage
+          onClose={() => setOpenFullScreenImage(false)}
+          imgUrl={fullScreenImage}
+        />
+      )}
+      {/* **** Display Image Full Screen */}
     </div>
   );
 };
