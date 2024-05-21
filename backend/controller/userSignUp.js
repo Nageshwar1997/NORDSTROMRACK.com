@@ -48,7 +48,7 @@ async function userSignUpController(req, res) {
       message: "User Registered Successfully",
     });
   } catch (error) {
-    res.json({
+    res.status(400).json({
       message: error.message || error,
       error: true,
       success: false,

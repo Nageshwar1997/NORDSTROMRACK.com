@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SummaryApi from "../common";
 import { toast } from "react-toastify";
 import { setUserDetails } from "../store/userSlice";
+import ROLE from "../common/role";
 
 const Header = () => {
   const [menuDisplay, setMenuDisplay] = useState(false);
@@ -38,7 +39,7 @@ const Header = () => {
     }
   };
   return (
-    <header className="h-16 shadow-md bg-white">
+    <header className="h-16 shadow-md bg-white transition-all">
       <div className="h-full container mx-auto flex items-center px-4 justify-between">
         <div className="cursor-pointer">
           <Link to="/">
@@ -57,30 +58,34 @@ const Header = () => {
         </div>
         <div className="flex items-center gap-8">
           <div className="relative flex justify-center">
-            <div
-              className="text-3xl cursor-pointer relative flex justify-center"
-              onClick={() => setMenuDisplay((prev) => !prev)}
-            >
-              {user?.profilePic ? (
-                <img
-                  src={user?.profilePic}
-                  alt={user.name}
-                  className={`w-10 h-10 rounded-full`}
-                />
-              ) : (
-                <FaRegUserCircle />
-              )}
-            </div>
+            {user?._id && (
+              <div
+                className="text-3xl cursor-pointer relative flex justify-center"
+                onClick={() => setMenuDisplay((prev) => !prev)}
+              >
+                {user?.profilePic ? (
+                  <img
+                    src={user?.profilePic}
+                    alt={user.name}
+                    className={`w-10 h-10 rounded-full`}
+                  />
+                ) : (
+                  <FaRegUserCircle />
+                )}
+              </div>
+            )}
             {menuDisplay && (
               <div className="absolute hidden md:block bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded-md">
                 <nav>
-                  <Link
-                    to={"admin-panel"}
-                    onClick={() => setMenuDisplay((prev) => !prev)}
-                    className="whitespace-nowrap hover:bg-blue-100 rounded-sm p-1"
-                  >
-                    Admin Panel
-                  </Link>
+                  {user?.role === ROLE.ADMIN && (
+                    <Link
+                      to={"admin-panel/all-products"}
+                      onClick={() => setMenuDisplay((prev) => !prev)}
+                      className="whitespace-nowrap hover:bg-blue-100 rounded-sm p-1"
+                    >
+                      Admin Panel
+                    </Link>
+                  )}
                 </nav>
               </div>
             )}
@@ -96,7 +101,7 @@ const Header = () => {
           <div className="cursor-pointer">
             {user?._id ? (
               <Link
-                to={"/login"}
+                to={"/"}
                 onClick={handleLogout}
                 className="px-4 pb-2 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700"
               >

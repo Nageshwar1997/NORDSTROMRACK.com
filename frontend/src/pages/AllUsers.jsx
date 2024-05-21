@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
 import SummaryApi from "../common";
 import { toast } from "react-toastify";
+import moment from "moment";
+import { MdModeEdit } from "react-icons/md";
+import ChangeUserRole from "../components/ChangeUserRole";
 
 const AllUsers = () => {
   const [allUsers, setAllUsers] = useState([]);
+  const [openUpdateRole, setOpenUpdateRole] = useState(false);
+  const [updateUserDetails, setUpdateUserDetails] = useState({
+    email: "",
+    name: "",
+    role: "",
+    _id: "",
+  });
 
   const fetchAllUsers = async () => {
     const fetchUsers = await fetch(SummaryApi.allUsers.url, {
@@ -20,7 +30,7 @@ const AllUsers = () => {
       toast.error(dataResponse.message);
       console.log(dataResponse.message);
     }
-    console.log("Data Response :", dataResponse);
+    // console.log("Data Response :", dataResponse);
   };
 
   useEffect(() => {
@@ -48,11 +58,32 @@ const AllUsers = () => {
                 <td>{user?.name}</td>
                 <td>{user?.email}</td>
                 <td>{user?.role}</td>
-                <td>{user?.createdAt}</td>
+                <td>{moment(user?.createdAt).format("lll")}</td>
+                <td>
+                  <button
+                    className="p-2 hover:bg-blue-700 rounded-full editBtn"
+                    onClick={() => {
+                      setUpdateUserDetails(user);
+                      setOpenUpdateRole(true);
+                    }}
+                  >
+                    <MdModeEdit />
+                  </button>
+                </td>
               </tr>
             ))}
         </tbody>
       </table>
+      {openUpdateRole && (
+        <ChangeUserRole
+          onClose={() => setOpenUpdateRole(false)}
+          name={updateUserDetails?.name}
+          email={updateUserDetails?.email}
+          role={updateUserDetails.role}
+          userId={updateUserDetails?._id}
+          callFunc={fetchAllUsers}
+        />
+      )}
     </div>
   );
 };

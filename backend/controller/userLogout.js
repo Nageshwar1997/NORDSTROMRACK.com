@@ -8,7 +8,7 @@ async function userLogoutController(req, res) {
       data: [],
     });
   } catch (error) {
-    res.json({
+    res.status(400).json({
       message: error.message || error,
       error: true,
       success: false,

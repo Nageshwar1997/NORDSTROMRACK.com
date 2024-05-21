@@ -69,7 +69,7 @@ const SignUp = () => {
       }
       // console.log("Submit Data Sign Up :", dataApi);
     } else {
-      console.log("Password and Confirm Password does not match");
+      toast.error("Password and Confirm Password does not match");
     }
 
     // console.log("Data Sign Up :", data);

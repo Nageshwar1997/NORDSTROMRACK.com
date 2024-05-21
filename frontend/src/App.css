@@ -19,14 +19,34 @@
 
   & tr:nth-child(even) {
     @apply bg-blue-300;
+    & .editBtn {
+      @apply bg-blue-50;
+    }
+    /* & .deleteBtn {
+      @apply bg-blue-300;
+    } */
   }
   & tr:nth-child(odd) {
     @apply bg-blue-50;
+    & .editBtn {
+      @apply bg-blue-300;
+    }
+    /* & .deleteBtn {
+      @apply bg-blue-50;
+    } */
   }
   & tr:hover {
     @apply bg-gray-300;
+    & .editBtn {
+      @apply bg-green-500;
+    }
+    /* & .deleteBtn {
+      @apply bg-red-500;
+    } */
   }
   & th {
     @apply bg-blue-700 py-3 text-white text-lg;
   }
 }
+
+

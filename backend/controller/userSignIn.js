@@ -27,7 +27,7 @@ async function userSignInController(req, res) {
         email: user.email,
       };
       const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, {
-        expiresIn: 60 * 60 * 8,
+        expiresIn: 60 * 60 * 12,
       });
 
       const tokenOption = {
@@ -44,7 +44,7 @@ async function userSignInController(req, res) {
       throw new Error("Wrong password please check your password...!");
     }
   } catch (error) {
-    res.json({
+    res.status(400).json({
       message: error.message || error,
       error: true,
       success: false,
