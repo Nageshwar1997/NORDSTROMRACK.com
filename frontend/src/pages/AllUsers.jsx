@@ -37,7 +37,7 @@ const AllUsers = () => {
     fetchAllUsers();
   }, []);
   return (
-    <div>
+    <div className="bg-white py-2 px-4">
       <h1 className="text-xl font-bold uppercase text-blue-900">All Users</h1>
       <table className="w-full userTable">
         <thead>
