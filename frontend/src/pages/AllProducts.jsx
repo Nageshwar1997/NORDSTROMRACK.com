@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UploadProduct from "../components/UploadProduct";
 
 const AllProducts = () => {
-  const [openUploadProduct, setOpenUploadProduct] = useState(true);
+  const [openUploadProduct, setOpenUploadProduct] = useState(false);
   return (
     <div>
       <div className="bg-white py-2 px-4 flex justify-between items-center">
