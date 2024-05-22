@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import displayUSDCurrency from "../helpers/displayCurrency";
+import displayINRCurrency from "../helpers/displayCurrency";
 
 import { MdModeEdit } from "react-icons/md";
 import AdminEditProduct from "./AdminEditProduct";
@@ -19,10 +19,10 @@ const AdminProductCard = ({ product, fetchAllProducts }) => {
         <div>
           <div className="flex gap-2">
             <p className="font-semibold">
-              {displayUSDCurrency(product?.sellingPrice)}
+              {displayINRCurrency(product?.sellingPrice)}
             </p>
             <p className="text-gray-500 line-through">
-              {displayUSDCurrency(product?.originalPrice)}
+              {displayINRCurrency(product?.originalPrice)}
             </p>
           </div>
           <div

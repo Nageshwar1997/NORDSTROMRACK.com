@@ -1,7 +1,7 @@
-const displayUSDCurrency = (amount) => {
-  const formatter = new Intl.NumberFormat("en-US", {
+const displayINRCurrency = (amount) => {
+  const formatter = new Intl.NumberFormat("en-IN", {
     style: "currency",
-    currency: "USD",
+    currency: "INR",
     minimumFractionDigits: 2,
   });
 
@@ -10,4 +10,4 @@ const displayUSDCurrency = (amount) => {
   return finalResult;
 };
 
-export default displayUSDCurrency;
+export default displayINRCurrency;
