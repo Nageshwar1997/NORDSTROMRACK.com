@@ -1,8 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UploadProduct from "../components/UploadProduct";
+import SummaryApi from "../common";
+import AdminProductCard from "../components/AdminProductCard";
 
 const AllProducts = () => {
   const [openUploadProduct, setOpenUploadProduct] = useState(false);
+  const [allProducts, setAllProducts] = useState([]);
+
+  const fetchAllProducts = async () => {
+    const fetchData = await fetch(SummaryApi.allProducts.url, {
+      method: SummaryApi.allProducts.method,
+    });
+
+    const responseData = await fetchData.json();
+
+    setAllProducts(responseData?.data || []);
+  };
+  // console.log(allProducts);
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
   return (
     <div>
       <div className="bg-white py-2 px-4 flex justify-between items-center">
@@ -16,6 +34,21 @@ const AllProducts = () => {
           Upload Product
         </button>
       </div>
+
+      {/* **** All Products **** */}
+      <div className="flex items-center gap-5 p-4">
+        {allProducts &&
+          allProducts.map((product, index) => {
+            return (
+              <AdminProductCard
+                key={index + "Product"}
+                product={product}
+                fetchAllProducts={fetchAllProducts}
+              />
+            );
+          })}
+      </div>
+
       {/* **** Upload Product Component **** */}
       {openUploadProduct && (
         <UploadProduct onClose={() => setOpenUploadProduct(false)} />

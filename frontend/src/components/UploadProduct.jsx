@@ -158,10 +158,8 @@ const UploadProduct = ({ onClose }) => {
                 <p className="text-sm">Upload Product Image</p>
                 <input
                   type="file"
-                  name="productImages"
                   id="uploadImageInput"
                   className="hidden"
-                  required
                   onChange={handleUploadProduct}
                 />
               </div>
