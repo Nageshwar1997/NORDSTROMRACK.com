@@ -8,7 +8,7 @@ import { MdDelete } from "react-icons/md";
 import SummaryApi from "../common";
 import { toast } from "react-toastify";
 
-const UploadProduct = ({ onClose }) => {
+const UploadProduct = ({ onClose, fetchAllProducts }) => {
   const [product, setProduct] = useState({
     productName: "",
     brandName: "",
@@ -74,6 +74,7 @@ const UploadProduct = ({ onClose }) => {
 
     if (responseData.success) {
       toast.success(responseData?.message);
+      fetchAllProducts();
       onClose();
     }
     if (responseData.error) {
