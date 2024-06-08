@@ -36,7 +36,7 @@ const AllProducts = () => {
       </div>
 
       {/* **** All Products **** */}
-      <div className="flex items-center gap-5 p-4">
+      <div className="flex items-center flex-wrap gap-3 p-4 h-[calc(100vh-190px)] overflow-y-scroll">
         {allProducts &&
           allProducts.map((product, index) => {
             return (
