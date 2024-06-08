@@ -8,14 +8,16 @@ const AdminProductCard = ({ product, fetchAllProducts }) => {
   return (
     <div className="bg-white p-4 rounded">
       <div className="w-40 relative">
-        <img
-          src={product?.productImages[0]}
-          alt={product?.productName}
-          width={100}
-          height={100}
-          className="w-fit mx-auto"
-        />
-        <h1 className="mb-1">{product?.productName}</h1>
+        <div className="w-32 h-32 flex justify-center items-center">
+          <img
+            src={product?.productImages[0]}
+            alt={product?.productName}
+            width={100}
+            height={100}
+            className="w-fit mx-auto object-fill h-full"
+          />
+        </div>
+        <h1 className="mb-1 text-ellipsis line-clamp-2">{product?.productName}</h1>
         <div>
           <div className="flex gap-2">
             <p className="font-semibold">

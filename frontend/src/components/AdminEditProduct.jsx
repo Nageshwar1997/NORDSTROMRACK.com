@@ -84,7 +84,7 @@ const AdminEditProduct = ({ productData, onClose, fetchAllProducts }) => {
   };
 
   return (
-    <div className="fixed bottom-0 top-0 right-0 left-0 flex justify-center items-center bg-red-500">
+    <div className="fixed bottom-0 top-0 right-0 left-0 flex justify-center items-center">
       <div className="bg-blue-100 bg-opacity-50 fixed w-full h-full bottom-0 top-0 left-0 right-0 flex justify-center items-center">
         <div className="bg-white p-4 rounded-md w-full max-w-2xl h-full max-h-[80%] overflow-hidden">
           <div className="flex justify-between items-center pb-3">
