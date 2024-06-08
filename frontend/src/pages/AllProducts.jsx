@@ -8,11 +8,10 @@ const AllProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
 
   const fetchAllProducts = async () => {
-    const fetchData = await fetch(SummaryApi.allProducts.url, {
-      method: SummaryApi.allProducts.method,
-    });
+    const fetchData = await fetch(SummaryApi.allProducts.url);
 
     const responseData = await fetchData.json();
+
 
     setAllProducts(responseData?.data || []);
   };

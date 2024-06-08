@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // CSS
 import "./App.css";
 
@@ -37,8 +38,10 @@ function App() {
 
     const dataApi = await dataResponse.json();
 
+    // console.log("Data Api",dataApi)
+
     if (dataApi.success) {
-      dispatch(setUserDetails(dataApi.data));
+      dispatch(setUserDetails(dataApi?.data));
     }
 
     // console.log("Data Api From App :", dataApi);

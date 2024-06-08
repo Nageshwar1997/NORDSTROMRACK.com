@@ -1,16 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const userSignUpController = require("../controller/userSignUp");
-const userSignInController = require("../controller/userSignIn");
-const userDetailsController = require("../controller/userDetails");
-const authToken = require("../middleware/authToken");
-const userLogoutController = require("../controller/userLogout");
-const allUsersController = require("../controller/allUsers");
-const updateUserController = require("../controller/updateUser");
-const uploadProductController = require("../controller/uploadProduct");
-const getProductController = require("../controller/getProduct");
-const updateProductController = require("../controller/updateProduct");
 
+// User Controllers
+const userSignUpController = require("../controller/user/userSignUp");
+const userSignInController = require("../controller/user/userSignIn");
+const userDetailsController = require("../controller/user/userDetails");
+const userLogoutController = require("../controller/user/userLogout");
+const allUsersController = require("../controller/user/allUsers");
+const updateUserController = require("../controller/user/updateUser");
+
+// // Product Controllers
+const uploadProductController = require("../controller/product/uploadProduct");
+const getProductController = require("../controller/product/getProduct");
+const updateProductController = require("../controller/product/updateProduct");
+
+// Middleware
+const authToken = require("../middleware/authToken");
+
+// User Routes
 router.post("/signup", userSignUpController);
 router.post("/signin", userSignInController);
 router.get("/user-details", authToken, userDetailsController);
