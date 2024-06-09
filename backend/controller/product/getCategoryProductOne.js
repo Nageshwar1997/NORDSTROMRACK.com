@@ -21,9 +21,9 @@ const getCategoryProductController = async (req, res) => {
         success: true,
       });
 
-      console.log("Product By Category", productByCategory);
+    //   console.log("Product By Category", productByCategory);
 
-    console.log("Product Category", productCategory);
+    // console.log("Product Category", productCategory);
   } catch (error) {
     res.status(400).json({
       message: error.message || error,

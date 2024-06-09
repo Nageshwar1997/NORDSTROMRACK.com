@@ -39,11 +39,11 @@ const Header = () => {
     }
   };
   return (
-    <header className="h-[63px] shadow-md bg-white transition-all">
+    <header className="h-16 shadow-md bg-white w-full transition-all fixed top-0 left-0 right-0 z-40">
       <div className="h-full container mx-auto flex items-center px-4 justify-between">
-        <div className="cursor-pointer">
+        <div className="cursor-pointer pt-1">
           <Link to="/">
-            <Logo w={140} h={50} />
+            <Logo w={128} h={50} />
           </Link>
         </div>
         <div className="hidden lg:flex items-center w-full justify-between max-w-xl rounded-full focus-within:shadow-md">

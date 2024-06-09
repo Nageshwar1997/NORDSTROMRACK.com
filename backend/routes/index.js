@@ -13,10 +13,12 @@ const updateUserController = require("../controller/user/updateUser");
 const uploadProductController = require("../controller/product/uploadProduct");
 const getProductController = require("../controller/product/getProduct");
 const updateProductController = require("../controller/product/updateProduct");
+const getCategoryProductController = require("../controller/product/getCategoryProductOne");
+
 
 // Middleware
 const authToken = require("../middleware/authToken");
-const getCategoryProductController = require("../controller/product/getCategoryProduct");
+const getCategoryWiseProductController = require("../controller/product/getCategoryWiseProduct");
 
 // User Routes
 router.post("/signup", userSignUpController);
@@ -33,5 +35,6 @@ router.post("/upload-product", authToken, uploadProductController);
 router.get("/get-products", getProductController);
 router.post("/update-product", authToken, updateProductController);
 router.get("/get-categoryProduct", getCategoryProductController);
+router.post("/category-product", getCategoryWiseProductController)
 
 module.exports = router;
