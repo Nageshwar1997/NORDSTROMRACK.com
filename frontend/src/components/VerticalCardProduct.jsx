@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import fetchCategoryWiseProduct from "../helpers/fetchCategoryWiseProduct";
 import displayINRCurrency from "../helpers/displayCurrency";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const VerticalCardProduct = ({ category, heading }) => {
   const [products, setProducts] = useState([]);
@@ -79,7 +80,8 @@ const VerticalCardProduct = ({ category, heading }) => {
             })
           : products?.map((product, index) => {
               return (
-                <div
+                <Link
+                  to={`/product/${product?._id}`}
                   key={index + "Category Product"}
                   className="w-full min-w-[180px] md:min-w-[350px] max-w-[180px] md:max-w-[350px] bg-white rounded-sm shadow"
                 >
@@ -117,7 +119,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                       Add To Cart
                     </button>
                   </div>
-                </div>
+                </Link>
               );
             })}
       </div>

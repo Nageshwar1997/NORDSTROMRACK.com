@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import fetchCategoryWiseProduct from "../helpers/fetchCategoryWiseProduct";
 import displayINRCurrency from "../helpers/displayCurrency";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+import addToCart from "../helpers/addToCart";
 
 const HorizontalCardProduct = ({ category, heading }) => {
   const [products, setProducts] = useState([]);
@@ -51,7 +54,7 @@ const HorizontalCardProduct = ({ category, heading }) => {
           <FaAngleRight />
         </button>
         {loading
-          ? loadingListArr.map((_,index) => {
+          ? loadingListArr.map((_, index) => {
               return (
                 <div
                   key={index + "Category Product"}
@@ -72,9 +75,10 @@ const HorizontalCardProduct = ({ category, heading }) => {
                 </div>
               );
             })
-          : products.map((product, index) => {
+          : products?.map((product, index) => {
               return (
-                <div
+                <Link
+                  to={`/product/${product?._id}`}
                   key={index + "Category Product"}
                   className="w-full min-w-[280px] md:min-w-[340px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow flex"
                 >
@@ -101,11 +105,14 @@ const HorizontalCardProduct = ({ category, heading }) => {
                         {displayINRCurrency(product?.originalPrice)}
                       </p>
                     </div>
-                    <button className="mt-1 text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-0.5 rounded-full">
+                    <button
+                      className="mt-1 text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-0.5 rounded-full"
+                      onClick={(e) => addToCart(e, product?._id)}
+                    >
                       Add To Cart
                     </button>
                   </div>
-                </div>
+                </Link>
               );
             })}
       </div>
