@@ -49,4 +49,7 @@
   }
 }
 
-
+/* **** Scroll Bar Hidden **** */
+.scrollbar-none::-webkit-scrollbar{
+  display: none;
+}
