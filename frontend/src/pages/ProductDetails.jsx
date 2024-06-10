@@ -4,6 +4,7 @@ import SummaryApi from "../common";
 import RatingStarGenerator from "../components/RatingStarGenerator";
 import displayINRCurrency from "../helpers/displayCurrency";
 import VerticalCardProduct from "../components/VerticalCardProduct";
+import CategoryWiseProductDisplay from "../components/CategoryWiseProductDisplay";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({
@@ -67,7 +68,7 @@ const ProductDetails = () => {
     setShowZoomImage(false);
   };
 
-  // console.log("Product Details", product);
+  console.log("Product Details", product);
   useEffect(() => {
     fetchProduct();
   }, []);
@@ -75,7 +76,7 @@ const ProductDetails = () => {
     <div className="container mx-auto p-4">
       <div className="min-h-[200px] flex flex-col gap-0 lg:flex-row lg:gap-4">
         {/* Product Image */}
-        <div className="h-96 flex flex-col gap-4 lg:flex-row-reverse">
+        <div className="h-65 md:h-96 flex flex-col gap-4 lg:flex-row-reverse">
           {loading ? (
             <div className="h-[300px] w-[300px] lg:w-96 lg:h-96 bg-slate-200 animate-pulse rounded-md"></div>
           ) : (
@@ -189,7 +190,12 @@ const ProductDetails = () => {
           </div>
         )}
       </div>
-      <VerticalCardProduct category={product?.category} heading={"Related Products"} />
+      {product?.category && (
+        <CategoryWiseProductDisplay
+          category={product?.category}
+          heading={"Similar Products"}
+        />
+      )}
     </div>
   );
 };

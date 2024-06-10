@@ -1,15 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import fetchCategoryWiseProduct from "../helpers/fetchCategoryWiseProduct";
 import displayINRCurrency from "../helpers/displayCurrency";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import addToCart from "../helpers/addToCart";
 
-const VerticalCardProduct = ({ category, heading }) => {
+const CategoryWiseProductDisplay = ({ category, heading }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const scrollElement = useRef();
   const loadingListArr = new Array(13).fill(null);
 
   const fetchProducts = async () => {
@@ -21,12 +19,7 @@ const VerticalCardProduct = ({ category, heading }) => {
     setLoading(false);
   };
 
-  const handleScrollRight = () => {
-    scrollElement.current.scrollLeft += 1000;
-  };
-  const handleScrollLeft = () => {
-    scrollElement.current.scrollLeft -= 1000;
-  };
+
 
   const calculateDiscount = (originalPrice, sellingPrice) => {
     return Math.round(((originalPrice - sellingPrice) / originalPrice) * 100);
@@ -38,24 +31,11 @@ const VerticalCardProduct = ({ category, heading }) => {
 
   //   console.log("Products", products);
   return (
-    <div className="container mx-auto px-4 my-6 relative">
+    <div className="container mx-auto px-0 my-6 relative">
       <h2 className="text-2xl font-semibold py-4">{heading}</h2>
       <div
-        className="flex items-center gap-2 md:gap-5 overflow-x-scroll scrollbar-none transition-all"
-        ref={scrollElement}
+        className="grid grid-cols-[repeat(auto-fit,minmax(300px,320px))] justify-between gap-6"
       >
-        <button
-          onClick={handleScrollLeft}
-          className="bg-white shadow-md rounded-full p-2 absolute left-0 text-lg hidden md:block z-10"
-        >
-          <FaAngleLeft />
-        </button>
-        <button
-          onClick={handleScrollRight}
-          className="bg-white shadow-md rounded-full p-2 absolute right-0 text-lg hidden md:block z-10"
-        >
-          <FaAngleRight />
-        </button>
         {loading
           ? loadingListArr.map((_, index) => {
               return (
@@ -131,4 +111,4 @@ const VerticalCardProduct = ({ category, heading }) => {
   );
 };
 
-export default VerticalCardProduct;
+export default CategoryWiseProductDisplay;
