@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import fetchCategoryWiseProduct from "../helpers/fetchCategoryWiseProduct";
 import displayINRCurrency from "../helpers/displayCurrency";
 import { Link } from "react-router-dom";
 import addToCart from "../helpers/addToCart";
 import Context from "../context";
+import scrollTop from "../helpers/scrollTop";
 
 const CategoryWiseProductDisplay = ({ category, heading }) => {
   const [products, setProducts] = useState([]);
@@ -72,6 +73,7 @@ const CategoryWiseProductDisplay = ({ category, heading }) => {
                   to={`/product/${product?._id}`}
                   key={index + "Category Product"}
                   className="w-full min-w-[180px] md:min-w-[350px] max-w-[180px] md:max-w-[350px] bg-white rounded-sm shadow"
+                  onClick={() => scrollTop()}
                 >
                   <div className="bg-slate-200 h-48 p-4 min-w-[180px] md:min-w-[145px] flex items-center justify-center">
                     <img

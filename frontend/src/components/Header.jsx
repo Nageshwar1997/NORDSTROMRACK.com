@@ -6,7 +6,7 @@ import Logo from "./Logo";
 // React Icons
 import { HiSearch } from "react-icons/hi";
 import { FaRegUserCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -17,11 +17,18 @@ import ROLE from "../common/role";
 import Context from "../context";
 
 const Header = () => {
+  const searchInputValue = useLocation()
   const [menuDisplay, setMenuDisplay] = useState(false);
+  const [searchInput, setSearchInput] = useState(
+    searchInputValue?.search?.split("=")[1]
+  );
   const user = useSelector((state) => state.user?.user);
   const context = useContext(Context);
+  const navigate = useNavigate();
+
   // console.log("user header", user);
 
+  console.log("Search Input Value", searchInputValue.search.split("=")[1]);
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
@@ -41,7 +48,19 @@ const Header = () => {
     }
   };
 
-  console.log("Header Cart Count", context?.cartProductCount);
+  // console.log("Header Cart Count", context?.cartProductCount);
+
+  const handleSearchInput = (e) => {
+    const { value } = e.target;
+    setSearchInput(value)
+
+    if (value) {
+      navigate(`/search?q=${value}`);
+    } else {
+      navigate("/search");
+    }
+  };
+
   return (
     <header className="h-16 shadow-md bg-white w-full transition-all fixed top-0 left-0 right-0 z-40">
       <div className="h-full container mx-auto flex items-center px-4 justify-between">
@@ -53,6 +72,8 @@ const Header = () => {
         <div className="hidden lg:flex items-center w-full justify-between max-w-xl rounded-full focus-within:shadow-md">
           <input
             type="text"
+            value={searchInput}
+            onChange={handleSearchInput}
             placeholder="Search Products Here....."
             className="w-full border border-r-0 h-[35px] rounded-l-full px-4 outline-none"
           />

@@ -71,7 +71,7 @@ const ProductDetails = () => {
   console.log("Product Details", product);
   useEffect(() => {
     fetchProduct();
-  }, []);
+  }, [params]);
   return (
     <div className="container mx-auto p-4">
       <div className="min-h-[200px] flex flex-col gap-0 lg:flex-row lg:gap-4">
