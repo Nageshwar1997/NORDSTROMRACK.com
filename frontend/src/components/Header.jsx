@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 // Assets
 import Logo from "./Logo";
@@ -6,18 +6,20 @@ import Logo from "./Logo";
 // React Icons
 import { HiSearch } from "react-icons/hi";
 import { FaRegUserCircle } from "react-icons/fa";
-import { TiShoppingCart } from "react-icons/ti";
 import { Link } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
 
 import { useDispatch, useSelector } from "react-redux";
 import SummaryApi from "../common";
 import { toast } from "react-toastify";
 import { setUserDetails } from "../store/userSlice";
 import ROLE from "../common/role";
+import Context from "../context";
 
 const Header = () => {
   const [menuDisplay, setMenuDisplay] = useState(false);
   const user = useSelector((state) => state.user?.user);
+  const context = useContext(Context);
   // console.log("user header", user);
 
   const dispatch = useDispatch();
@@ -38,6 +40,8 @@ const Header = () => {
       toast.error(data.message);
     }
   };
+
+  console.log("Header Cart Count", context?.cartProductCount);
   return (
     <header className="h-16 shadow-md bg-white w-full transition-all fixed top-0 left-0 right-0 z-40">
       <div className="h-full container mx-auto flex items-center px-4 justify-between">
@@ -90,14 +94,18 @@ const Header = () => {
               </div>
             )}
           </div>
-          <div className="text-3xl cursor-pointer relative">
-            <span>
-              <TiShoppingCart />
-              <div className="bg-blue-600 text-white w-4 h-4 p-1 flex items-center justify-center rounded-full absolute -top-2 right-1">
-                <p className="text-xs">0</p>
-              </div>
-            </span>
-          </div>
+          {user?._id && (
+            <Link to={"/cart"} className="text-3xl cursor-pointer relative">
+              <span>
+                <FaShoppingCart />
+                {context?.cartProductCount > 0 && (
+                  <div className="bg-blue-600 text-white w-5 h-5 p-1 flex items-center justify-center rounded-full absolute -top-2 -right-3">
+                    <p className="text-xs">{context?.cartProductCount}</p>
+                  </div>
+                )}
+              </span>
+            </Link>
+          )}
           <div className="cursor-pointer">
             {user?._id ? (
               <Link

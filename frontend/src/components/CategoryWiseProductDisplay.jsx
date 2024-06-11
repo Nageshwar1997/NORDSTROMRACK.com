@@ -1,14 +1,23 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import fetchCategoryWiseProduct from "../helpers/fetchCategoryWiseProduct";
 import displayINRCurrency from "../helpers/displayCurrency";
 import { Link } from "react-router-dom";
 import addToCart from "../helpers/addToCart";
+import Context from "../context";
 
 const CategoryWiseProductDisplay = ({ category, heading }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  
   const loadingListArr = new Array(13).fill(null);
+  
+  const { fetchAddToCartCount } = useContext(Context);
+
+  const handleAddToCart = async (e, id) => {
+    await addToCart(e, id);
+    fetchAddToCartCount();
+  };
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -19,11 +28,11 @@ const CategoryWiseProductDisplay = ({ category, heading }) => {
     setLoading(false);
   };
 
-
-
   const calculateDiscount = (originalPrice, sellingPrice) => {
     return Math.round(((originalPrice - sellingPrice) / originalPrice) * 100);
   };
+
+  
 
   useEffect(() => {
     fetchProducts();
@@ -33,9 +42,7 @@ const CategoryWiseProductDisplay = ({ category, heading }) => {
   return (
     <div className="container mx-auto px-0 my-6 relative">
       <h2 className="text-2xl font-semibold py-4">{heading}</h2>
-      <div
-        className="grid grid-cols-[repeat(auto-fit,minmax(300px,320px))] justify-between gap-6"
-      >
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,320px))] justify-between gap-6">
         {loading
           ? loadingListArr.map((_, index) => {
               return (
@@ -98,7 +105,7 @@ const CategoryWiseProductDisplay = ({ category, heading }) => {
                     </div>
                     <button
                       className="text-xs md:text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-full"
-                      onClick={(e) => addToCart(e, product?._id)}
+                      onClick={(e) => handleAddToCart(e, product._id)}
                     >
                       Add To Cart
                     </button>

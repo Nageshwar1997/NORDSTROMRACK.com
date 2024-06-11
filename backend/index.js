@@ -20,7 +20,7 @@ app.use("/api", router);
 const PORT = 8080 || process.env.PORT;
 connectDB().then(() => {
   app.listen(PORT, () => {
-    console.log("Connected to MongoDB");
+    console.log("Hello Nageshwar You are Connected to MongoDB");
     console.log("Server is running on port", PORT);
   });
 });
