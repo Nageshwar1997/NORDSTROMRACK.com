@@ -4,6 +4,8 @@ import SummaryApi from "../common";
 import Context from "../context";
 import displayINRCurrency from "../helpers/displayCurrency";
 
+import { MdDelete } from "react-icons/md";
+
 const Cart = () => {
   const [cartProducts, setCartProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -37,7 +39,7 @@ const Cart = () => {
     fetchCartProducts();
   }, []);
 
-  const handleIncreaseUpdateCartProductQuantity = async (id,quantity) => {
+  const handleIncreaseUpdateCartProductQuantity = async (id, quantity) => {
     const response = await fetch(
       SummaryApi.updateAddToCartProductQuantity.url,
       {
@@ -47,6 +49,7 @@ const Cart = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          _id: id,
           quantity: quantity + 1,
         }),
       }
@@ -54,10 +57,68 @@ const Cart = () => {
 
     const responseData = await response.json();
 
-    if(responseData.success){
+    if (responseData.success) {
       fetchCartProducts();
     }
-  }
+  };
+
+  const handleDecreaseUpdateCartProductQuantity = async (id, quantity) => {
+    if (quantity >= 2) {
+      const response = await fetch(
+        SummaryApi.updateAddToCartProductQuantity.url,
+        {
+          method: SummaryApi.updateAddToCartProductQuantity.method,
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            _id: id,
+            quantity: quantity - 1,
+          }),
+        }
+      );
+
+      const responseData = await response.json();
+
+      if (responseData.success) {
+        fetchCartProducts();
+      }
+    }
+  };
+
+  const handleDeleteCartProduct = async (id) => {
+    const response = await fetch(SummaryApi.deleteCartProduct.url, {
+      method: SummaryApi.deleteCartProduct.method,
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: id,
+      }),
+    });
+
+    const responseData = await response.json();
+
+    if (responseData.success) {
+      fetchCartProducts();
+      context.fetchAddToCartCount();
+    }
+  };
+
+  const totalQuantity = cartProducts?.reduce(
+    (previousValue, currentValue) => previousValue + currentValue?.quantity,
+    0
+  );
+
+  const totalPrice = cartProducts?.reduce(
+    (previousValue, currentValue) =>
+      previousValue +
+      currentValue?.quantity * currentValue?.productId?.sellingPrice,
+    0
+  );
+
   return (
     <div className="container mx-auto max-w-[96%] m-4">
       <div className="text-center text-lg">
@@ -88,7 +149,14 @@ const Cart = () => {
                         className="w-full h-full object-scale-down mix-blend-multiply"
                       />
                     </div>
-                    <div className="px-4 py-2">
+                    <div className="px-4 py-2 relative">
+                      {/* Remove Product */}
+                      <div
+                        className="absolute right-0 top-0 text-red-600 hover:bg-red-600 hover:text-white rounded-full m-1 p-1 text-lg cursor-pointer"
+                        onClick={() => handleDeleteCartProduct(product?._id)}
+                      >
+                        <MdDelete />
+                      </div>
                       <h2
                         title={product?.productId?.productName}
                         className="text-md lg:text-lg text-ellipsis line-clamp-1"
@@ -98,15 +166,38 @@ const Cart = () => {
                       <p className="capitalize text-slate-500">
                         {product?.productId?.category}
                       </p>
-                      <p className="text-red-600 font-medium text-md">
-                        {displayINRCurrency(product?.productId?.sellingPrice)}
-                      </p>
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-red-600 font-medium text-md">
+                          {displayINRCurrency(product?.productId?.sellingPrice)}
+                        </p>
+                        <p className="text-slate-600 font-semibold text-lg">
+                          {displayINRCurrency(
+                            product?.productId?.sellingPrice * product?.quantity
+                          )}
+                        </p>
+                      </div>
                       <div className="flex items-center gap-2 mt-1">
-                        <button className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center hover:bg-red-600 hover:text-white rounded">
+                        <button
+                          className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center hover:bg-red-600 hover:text-white rounded"
+                          onClick={() =>
+                            handleDecreaseUpdateCartProductQuantity(
+                              product?._id,
+                              product?.quantity
+                            )
+                          }
+                        >
                           -
                         </button>
                         <span>{product?.quantity}</span>
-                        <button className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center hover:bg-red-600 hover:text-white rounded"onClick={()=>handleIncreaseUpdateCartProductQuantity(product?._id, product?.quantity)}>
+                        <button
+                          className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center hover:bg-red-600 hover:text-white rounded"
+                          onClick={() =>
+                            handleIncreaseUpdateCartProductQuantity(
+                              product?._id,
+                              product?.quantity
+                            )
+                          }
+                        >
                           +
                         </button>
                       </div>
@@ -123,7 +214,18 @@ const Cart = () => {
               Total
             </div>
           ) : (
-            <div className="h-36 bg-slate-200">Total</div>
+            <div className="h-36 bg-slate-200 rounded">
+              <h2 className="text-white bg-red-600 px-4 py-1">Summary</h2>
+              <div className="flex items-center justify-between gap-4 px-4 font-medium text-lg text-slate-600">
+                <p>Quantity</p>
+                <p>{totalQuantity}</p>
+              </div>
+              <div className="flex items-center justify-between gap-4 px-4 font-medium text-lg text-slate-600">
+                <p>Total</p>
+                <p>{displayINRCurrency(totalPrice)}</p>
+                </div>
+                <button className="bg-blue-600 p-2 text-white w-full">Make Payment</button>
+            </div>
           )}
         </div>
       </div>

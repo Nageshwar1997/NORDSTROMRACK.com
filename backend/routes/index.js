@@ -23,6 +23,7 @@ const getProductDetailsController = require("../controller/product/getProductDet
 // Middleware
 const authToken = require("../middleware/authToken");
 const updateAddToCartCountController = require("../controller/user/updateCountAddToCart");
+const deleteProductFromCartController = require("../controller/user/deleteFromCart");
 
 // User Routes
 router.post("/signup", userSignUpController);
@@ -47,5 +48,6 @@ router.post("/add-to-cart", authToken, addToCartController);
 router.get("/count-add-to-cart", authToken, countAddToCartController);
 router.get("/user-cart", authToken, addToCartViewController);
 router.post("/update-count-add-to-cart", authToken, updateAddToCartCountController);
+router.post("/delete-cart-product", authToken, deleteProductFromCartController);
 
 module.exports = router;

@@ -2,12 +2,12 @@ const addToCartProductModel = require("../../models/addToCartProductModel");
 
 const updateAddToCartCountController = async (req, res) => {
   try {
-    const currentUserId = req.userId;
-    const addToCartProductId = req.body._id;
-    const quantity = req.body.quantity;
+    const currentUserId = req?.userId;
+    const addToCartProductId = req?.body?._id;
+    const quantity = req?.body?.quantity;
 
     const updateProductCount = await addToCartProductModel.updateOne(
-      addToCartProductId,
+      { _id: addToCartProductId },
       {
         ...(quantity && { quantity: quantity }),
       }
