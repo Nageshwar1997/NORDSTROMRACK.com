@@ -5,7 +5,10 @@ const addToCartController = async (req, res) => {
     const { productId } = req?.body;
     const currentUserId = req.userId;
 
-    const isProductExist = await addToCartProductModel.findOne({ productId });
+    const isProductExist = await addToCartProductModel.findOne({
+      productId,
+      userId: currentUserId,
+    });
 
     console.log("isProductExist", isProductExist);
 
