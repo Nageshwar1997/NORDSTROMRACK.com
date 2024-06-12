@@ -50,7 +50,7 @@ const CategoryList = () => {
           : categoryProducts?.map((product) => {
               return (
                 <Link
-                  to={`/product-category/${product?.category}`}
+                  to={`/product-category?category=${product?.category}`}
                   key={product._id + Math.random()}
                   className="p-2 cursor-pointer"
                 >

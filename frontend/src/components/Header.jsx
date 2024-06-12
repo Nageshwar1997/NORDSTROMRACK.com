@@ -17,18 +17,16 @@ import ROLE from "../common/role";
 import Context from "../context";
 
 const Header = () => {
-  const searchInputValue = useLocation()
+  const searchInputValue = useLocation();
+  const URLSearch = new URLSearchParams(searchInputValue?.search);
+  const searchQuery = URLSearch.getAll("q");
   const [menuDisplay, setMenuDisplay] = useState(false);
-  const [searchInput, setSearchInput] = useState(
-    searchInputValue?.search?.split("=")[1]
-  );
+  const [searchInput, setSearchInput] = useState(searchQuery);
   const user = useSelector((state) => state.user?.user);
   const context = useContext(Context);
   const navigate = useNavigate();
 
   // console.log("user header", user);
-
-  console.log("Search Input Value", searchInputValue.search.split("=")[1]);
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
@@ -42,6 +40,9 @@ const Header = () => {
     if (data.success) {
       toast.success(data.message);
       dispatch(setUserDetails(null));
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
     }
     if (data.error) {
       toast.error(data.message);
@@ -52,7 +53,7 @@ const Header = () => {
 
   const handleSearchInput = (e) => {
     const { value } = e.target;
-    setSearchInput(value)
+    setSearchInput(value);
 
     if (value) {
       navigate(`/search?q=${value}`);
@@ -129,13 +130,12 @@ const Header = () => {
           )}
           <div className="cursor-pointer">
             {user?._id ? (
-              <Link
-                to={"/"}
+              <button
                 onClick={handleLogout}
                 className="px-4 pb-2 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700"
               >
                 Logout
-              </Link>
+              </button>
             ) : (
               <Link
                 to={"/login"}

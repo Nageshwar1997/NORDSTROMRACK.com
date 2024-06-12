@@ -25,6 +25,7 @@ const authToken = require("../middleware/authToken");
 const updateAddToCartCountController = require("../controller/user/updateCountAddToCart");
 const deleteProductFromCartController = require("../controller/user/deleteFromCart");
 const searchProductController = require("../controller/product/searchProduct");
+const filterProductController = require("../controller/product/filterProduct");
 
 // User Routes
 router.post("/signup", userSignUpController);
@@ -44,6 +45,7 @@ router.get("/get-categoryProduct", getCategoryProductController);
 router.post("/category-product", getCategoryWiseProductController);
 router.post("/product-details", getProductDetailsController);
 router.get("/search", searchProductController);
+router.post("/filter-product", filterProductController);
 
 // User Add To Cart
 router.post("/add-to-cart", authToken, addToCartController);
