@@ -78,3 +78,7 @@ replace package.json with below text
 ### Install Cookie-Parser
 
 `npm i cookie-parser`
+
+### Install Stripe
+
+`npm install --save stripe`
