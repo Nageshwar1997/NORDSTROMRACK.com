@@ -34,9 +34,16 @@ module.exports = {
 
 `npm install @reduxjs/toolkit`
 
-### Install MonentJS
+### Install MomentJS
 
 `npm install moment --save`
+
+### Install React Stripe JS
+
+`npm install --save @stripe/react-stripe-js @stripe/stripe-js`
+
+
+<!-- Backend Installation -->
 
 # Backend Installation
 

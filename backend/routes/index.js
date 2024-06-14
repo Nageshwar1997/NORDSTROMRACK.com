@@ -26,6 +26,7 @@ const updateAddToCartCountController = require("../controller/user/updateCountAd
 const deleteProductFromCartController = require("../controller/user/deleteFromCart");
 const searchProductController = require("../controller/product/searchProduct");
 const filterProductController = require("../controller/product/filterProduct");
+const paymentController = require("../controller/order/paymentController");
 
 // User Routes
 router.post("/signup", userSignUpController);
@@ -57,5 +58,8 @@ router.post(
   updateAddToCartCountController
 );
 router.post("/delete-cart-product", authToken, deleteProductFromCartController);
+
+// Payment & Order Routes
+router.post("/payment", authToken, paymentController);
 
 module.exports = router;

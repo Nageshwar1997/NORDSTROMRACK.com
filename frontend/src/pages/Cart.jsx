@@ -6,6 +6,10 @@ import displayINRCurrency from "../helpers/displayCurrency";
 
 import { MdDelete } from "react-icons/md";
 
+import { loadStripe } from "@stripe/stripe-js";
+
+import process from "../env";
+
 const Cart = () => {
   const [cartProducts, setCartProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -121,6 +125,33 @@ const Cart = () => {
     0
   );
 
+  const handlePayment = async () => {
+    const stripePromise = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+    const response = await fetch(SummaryApi.payment.url, {
+      method: SummaryApi.payment.method,
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cartItems: cartProducts }),
+    });
+
+    const responseData = await response.json();
+
+    // console.log("Payment Response", responseData);
+    if (responseData?.id) {
+      stripePromise
+        .redirectToCheckout({
+          sessionId: responseData.id,
+        })
+        .then((result) => {
+          console.log("Stripe Result", result);
+        });
+     }
+
+    console.log("Stripe Promise", stripePromise);
+  };
+
   return (
     <div className="container mx-auto max-w-[96%] m-4">
       <div className="text-center text-lg">
@@ -210,28 +241,33 @@ const Cart = () => {
         </div>
 
         {/* Total Product Price Summary */}
-        <div className="mt-5 lg:mt-0 w-full max-w-sm">
-          {loading ? (
-            <div className="min-h-36 bg-slate-200 border border-slate-300 animate-pulse">
-              Total
-            </div>
-          ) : (
-            <div className="h-36 bg-slate-200 rounded">
-              <h2 className="text-white bg-red-600 px-4 py-1">Summary</h2>
-              <div className="flex items-center justify-between gap-4 px-4 font-medium text-lg text-slate-600">
-                <p>Quantity</p>
-                <p>{totalQuantity}</p>
+        {cartProducts.length > 0 && (
+          <div className="mt-5 lg:mt-0 w-full max-w-sm">
+            {loading ? (
+              <div className="min-h-36 bg-slate-200 border border-slate-300 animate-pulse">
+                Total
               </div>
-              <div className="flex items-center justify-between gap-4 px-4 font-medium text-lg text-slate-600">
-                <p>Total</p>
-                <p>{displayINRCurrency(totalPrice)}</p>
+            ) : (
+              <div className="h-36 bg-slate-200 rounded">
+                <h2 className="text-white bg-red-600 px-4 py-1">Summary</h2>
+                <div className="flex items-center justify-between gap-4 px-4 font-medium text-lg text-slate-600">
+                  <p>Quantity</p>
+                  <p>{totalQuantity}</p>
+                </div>
+                <div className="flex items-center justify-between gap-4 px-4 font-medium text-lg text-slate-600">
+                  <p>Total</p>
+                  <p>{displayINRCurrency(totalPrice)}</p>
+                </div>
+                <button
+                  className="bg-blue-600 p-2 text-white w-full"
+                  onClick={handlePayment}
+                >
+                  Make Payment
+                </button>
               </div>
-              <button className="bg-blue-600 p-2 text-white w-full">
-                Make Payment
-              </button>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
