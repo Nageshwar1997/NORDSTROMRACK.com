@@ -5,7 +5,7 @@ const paymentController = async (req, res) => {
   try {
     const { cartItems } = req.body;
 
-    console.log("Cart Items", cartItems);
+    // console.log("Cart Items", cartItems);
 
     const user = await userModel.findOne({ _id: req?.userId });
 
@@ -16,6 +16,9 @@ const paymentController = async (req, res) => {
       billing_address_collection: "auto",
       shipping_options: [{ shipping_rate: "shr_1PQx2oLyW1KBitgiUGJln7i0" }],
       customer_email: user?.email,
+      metadata: {
+        userId: req.userId,
+      },
       line_items: cartItems.map((item, index) => {
         return {
           price_data: {

@@ -12,7 +12,7 @@ async function updateUserController(req, res) {
 
     const user = await userModel.findById(sessionUser);
 
-    console.log("User Role :", user.role);
+    // console.log("User Role :", user.role);
 
     const updateUser = await userModel.findByIdAndUpdate(userId, payload);
 

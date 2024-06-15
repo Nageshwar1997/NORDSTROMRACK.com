@@ -16,7 +16,7 @@ const addToCartViewController = async (req, res) => {
       error: false,
     });
 
-    console.log("cartAllProducts", cartAllProducts);
+    // console.log("cartAllProducts", cartAllProducts);
   } catch (error) {
     res.json({
       message: error.message || error,

@@ -81,6 +81,10 @@ const SummaryApi = {
     url: `${backendDomain}/api/payment`,
     method: "post",
   },
+  getOrders: {
+    url: `${backendDomain}/api/order-list`,
+    method: "get",
+  },
 };
 
 export default SummaryApi;

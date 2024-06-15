@@ -10,7 +10,7 @@ const addToCartController = async (req, res) => {
       userId: currentUserId,
     });
 
-    console.log("isProductExist", isProductExist);
+    // console.log("isProductExist", isProductExist);
 
     if (isProductExist) {
       return res.json({
