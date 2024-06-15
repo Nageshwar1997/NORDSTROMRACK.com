@@ -12,20 +12,7 @@ const paymentController = async (req, res) => {
     const params = {
       submit_type: "pay",
       mode: "payment",
-      payment_method_types: [
-        "card",
-        // "p24",
-        // "ideal",
-        // "sofort",
-        // "bancontact",
-        // "eps",
-        // "giropay",
-        // "przelewy24",
-        // "mybank",
-        // "fpx",
-        // "ach",
-        // "sepa",
-      ],
+      payment_method_types: ["card"],
       billing_address_collection: "auto",
       shipping_options: [{ shipping_rate: "shr_1PQx2oLyW1KBitgiUGJln7i0" }],
       customer_email: user?.email,
@@ -40,7 +27,7 @@ const paymentController = async (req, res) => {
                 productId: item.productId?._id,
               },
             },
-            unit_amount: item.productId?.sellingPrice,
+            unit_amount: item.productId?.sellingPrice * 100,
           },
           adjustable_quantity: {
             enabled: true,
@@ -50,7 +37,7 @@ const paymentController = async (req, res) => {
         };
       }),
       success_url: `${process.env.FRONTEND_URL}/success`,
-      cancel_url: `${process.env.FRONTEND_URL}/canceled`,
+      cancel_url: `${process.env.FRONTEND_URL}/cancel`,
     };
 
     const session = await stripe.checkout.sessions.create(params);
