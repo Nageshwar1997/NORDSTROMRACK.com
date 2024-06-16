@@ -9,7 +9,7 @@ const AdminPanel = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (user?.role !== ROLE?.ADMIN) {
-      navigate("/")
+      navigate("/");
     }
   }, [user]);
 
@@ -39,6 +39,9 @@ const AdminPanel = () => {
             </Link>
             <Link to={"all-products"} className="px-2 py-1 hover:bg-blue-100">
               All Products
+            </Link>
+            <Link to={"all-orders"} className="px-2 py-1 hover:bg-blue-100">
+              All Orders
             </Link>
           </nav>
         </div>
