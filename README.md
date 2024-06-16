@@ -2,6 +2,10 @@
 
 ## Frontend Installation
 
+### CRA - Create React App
+
+`npx create-react-app frontend`
+
 ### Tailwind CSS
 
 `npm install -D tailwindcss`
