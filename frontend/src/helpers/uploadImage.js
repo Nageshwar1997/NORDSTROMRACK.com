@@ -1,9 +1,7 @@
-// Cloudinary URL = https://api.cloudinary.com/v1_1/drbhw0nwt/image/upload
-// Cloudinary Name = drbhw0nwt
+import process from "../env";
 
-const url = `https://api.cloudinary.com/v1_1/drbhw0nwt/image/upload`;
+const url = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME_CLOUDINARY}/image/upload`;
 const uploadImage = async (image) => {
-  
   const formData = new FormData();
   formData.append("file", image);
   formData.append("upload_preset", "NORDSTROMRACK_product");
@@ -12,7 +10,7 @@ const uploadImage = async (image) => {
     body: formData,
   });
 
-    return dataResponse.json();
+  return dataResponse.json();
 };
 
 export default uploadImage;

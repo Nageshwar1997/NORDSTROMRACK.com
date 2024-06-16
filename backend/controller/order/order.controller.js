@@ -3,11 +3,13 @@ const orderProductModel = require("../../models/orderProductModel");
 const orderController = async (req, res) => {
   try {
     const currentUserId = req.userId;
-    const orderList = await orderProductModel.find({
-      userId: currentUserId,
-    });
-      
-      console.log("Order List", orderList);
+    const orderList = await orderProductModel
+      .find({
+        userId: currentUserId,
+      })
+      .sort({ createdAt: -1 });
+
+    console.log("Order List", orderList);
 
     res.status(200).json({
       message: "Order List",
@@ -15,7 +17,6 @@ const orderController = async (req, res) => {
       error: false,
       success: true,
     });
-      
   } catch (error) {
     res.status(500).json({
       message: error.message || error,
@@ -25,4 +26,4 @@ const orderController = async (req, res) => {
   }
 };
 
-module.exports = orderController
+module.exports = orderController;

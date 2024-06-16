@@ -21,33 +21,83 @@ const Orders = () => {
     fetchOrderDetails();
   }, []);
   return (
-    <div>
-      {orders.length === 0 && <p>No Orders Found</p>}
-      {orders.length > 0 &&
-        orders.map((order, index) => {
-          return (
-            <div key={order._id + Math.random() + index}>
-              <p className="font-medium text-lg">
-                {moment(order.createdAt).format("LLLL")}
-              </p>
-              <div>
-                {order?.productDetails.map((product, index) => {
-                  return (
-                    <div key={index + Math.random()}>
-                      <img
-                        src={product?.images[0]}
-                        alt={product?.name}
-                        className="w-28 h-28 bg-slate-200 object-scale-down p-2 mix-blend-multiply"
-                      />
-                      <div>{product?.name}</div>
-                      <div>{displayINRCurrency(product?.price)}</div>
+    <div className="p-4 w-full">
+      {orders.length === 0 && <p>No Orders Available</p>}
+      <div>
+        {orders.length > 0 &&
+          orders.map((order, index) => {
+            return (
+              <div key={order._id + Math.random() + index}>
+                <p className="font-medium text-lg">
+                  {moment(order.createdAt).format("LLLL")}
+                </p>
+                <div className="border-2 border-slate-300 p-1 rounded">
+                  <div className="flex flex-col lg:flex-row justify-between gap-2">
+                    <div className="grid gap-1">
+                      {order?.productDetails.map((product, index) => {
+                        return (
+                          <div
+                            key={index + product.productId}
+                            className="flex gap-3 rounded-lg p-2 bg-slate-200"
+                          >
+                            <img
+                              src={product?.images[0]}
+                              alt={product?.name}
+                              className="w-28 h-28 object-scale-down p-2 rounded-lg mix-blend-multiply"
+                            />
+                            <div>
+                              <div className="font-medium text-lg text-ellipsis line-clamp-1">
+                                {product?.name}
+                              </div>
+                              <div className="flex items-center gap-5 mt-1">
+                                <div className="font-semibold text-lg text-red-600">
+                                  {displayINRCurrency(product?.price)}
+                                </div>
+                                <p>Quantity : {product?.quantity}</p>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
-                  );
-                })}
+                    <div className="flex flex-col gap-4 p-2 min-w-[300px]">
+                      <div>
+                        <div className="font-medium text-lg">
+                          Payment Details
+                        </div>
+                        <p className="ml-1">
+                          Payment Method :{" "}
+                          {order?.paymentDetails.payment_method_type[0]}
+                        </p>
+                        <p className="ml-1">
+                          Payment Status :{" "}
+                          {order?.paymentDetails.payment_status}
+                        </p>
+                      </div>
+                      <div>
+                        <div className="font-medium text-lg">
+                          Shipping Details
+                        </div>
+                        {order.shipping_options.map((option, index) => (
+                          <div
+                            key={option.shipping_rate + index}
+                            className="ml-1"
+                          >
+                            Shipping Charge :{" "}
+                            {displayINRCurrency(option.shipping_amount)}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="font-semibold ml-auto w-fit lg:text-lg pr-2">
+                    Total Amount : {displayINRCurrency(order.totalAmount)}
+                  </div>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+      </div>
     </div>
   );
 };

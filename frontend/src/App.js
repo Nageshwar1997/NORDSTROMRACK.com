@@ -66,6 +66,7 @@ function App() {
     // User Cart Count
     fetchAddToCartCount();
   }, []);
+
   return (
     <>
       <Context.Provider

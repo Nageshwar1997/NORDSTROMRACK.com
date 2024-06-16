@@ -102,7 +102,7 @@ const Header = () => {
             )}
             {menuDisplay && (
               <div className="absolute hidden md:block bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded-md">
-                <nav>
+                <nav className="flex flex-col">
                   {user?.role === ROLE.ADMIN && (
                     <Link
                       to={"admin-panel/all-products"}
@@ -112,6 +112,13 @@ const Header = () => {
                       Admin Panel
                     </Link>
                   )}
+                  <Link
+                    to={"/orders"}
+                    onClick={() => setMenuDisplay((prev) => !prev)}
+                    className="whitespace-nowrap hover:bg-blue-100 rounded-sm p-1"
+                  >
+                    Orders
+                  </Link>
                 </nav>
               </div>
             )}

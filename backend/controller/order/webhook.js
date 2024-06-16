@@ -1,4 +1,5 @@
 const stripe = require("../../config/stripe");
+const addToCartProductModel = require("../../models/addToCartProductModel");
 const orderProductModel = require("../../models/orderProductModel");
 const endpointSecret = process.env.STRIPE_ENDPOINT_WEBHOOK_SECRET_KEY;
 
@@ -72,6 +73,11 @@ const webHookController = async (req, res) => {
       };
       const order = await orderProductModel(orderDetails);
       const saveOrder = await order.save();
+
+      if (saveOrder?._id) {
+        const deleteCartProducts = await addToCartProductModel.deleteMany({ userId: session.metadata.userId });
+        
+      }
 
       break;
     // ... handle other event types
