@@ -61,7 +61,7 @@ const SummaryApi = {
     method: "get",
   },
   userCart: {
-    url: `${backendDomain}/api//user-cart`,
+    url: `${backendDomain}/api/user-cart`,
     method: "get",
   },
   updateAddToCartProductQuantity: {
