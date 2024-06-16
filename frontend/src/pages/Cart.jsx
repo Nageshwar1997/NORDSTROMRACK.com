@@ -164,82 +164,82 @@ const Cart = () => {
       <div className="flex flex-col lg:flex-row gap-10 lg:justify-between p-2">
         {/* Cart Products */}
         <div className="w-full max-w-3xl grid gap-2">
-          {loading
-            ? loadingCartArr.map((_, index) => (
-                <div
-                  key={index + "cartProductLoading"}
-                  className="w-full bg-slate-200 h-32 border border-slate-300 animate-pulse rounded-md"
-                ></div>
-              ))
-            : cartProducts.map((product) => {
-                return (
+          {loading &&
+            loadingCartArr.map((_, index) => (
+              <div
+                key={index + "cartProductLoading"}
+                className="w-full bg-slate-200 h-32 border border-slate-300 animate-pulse rounded-md"
+              ></div>
+            ))}
+          {cartProducts.map((product) => {
+            return (
+              <div
+                key={product?._id + "cartProduct"}
+                className="w-full bg-white h-32 border border-slate-300 rounded-md grid grid-cols-[128px,1fr]"
+              >
+                <div className="h-32 w-32 bg-slate-200 p-2">
+                  <img
+                    src={product?.productId?.productImages[0]}
+                    alt={product?.productId?.productName}
+                    className="w-full h-full object-scale-down mix-blend-multiply"
+                  />
+                </div>
+                <div className="px-4 py-2 relative">
+                  {/* Remove Product */}
                   <div
-                    key={product?._id + "cartProduct"}
-                    className="w-full bg-white h-32 border border-slate-300 rounded-md grid grid-cols-[128px,1fr]"
+                    className="absolute right-0 top-0 text-red-600 hover:bg-red-600 hover:text-white rounded-full m-1 p-1 text-lg cursor-pointer"
+                    onClick={() => handleDeleteCartProduct(product?._id)}
                   >
-                    <div className="h-32 w-32 bg-slate-200 p-2">
-                      <img
-                        src={product?.productId?.productImages[0]}
-                        alt={product?.productId?.productName}
-                        className="w-full h-full object-scale-down mix-blend-multiply"
-                      />
-                    </div>
-                    <div className="px-4 py-2 relative">
-                      {/* Remove Product */}
-                      <div
-                        className="absolute right-0 top-0 text-red-600 hover:bg-red-600 hover:text-white rounded-full m-1 p-1 text-lg cursor-pointer"
-                        onClick={() => handleDeleteCartProduct(product?._id)}
-                      >
-                        <MdDelete />
-                      </div>
-                      <h2
-                        title={product?.productId?.productName}
-                        className="text-md lg:text-lg text-ellipsis line-clamp-1"
-                      >
-                        {product?.productId?.productName}
-                      </h2>
-                      <p className="capitalize text-slate-500">
-                        {product?.productId?.category}
-                      </p>
-                      <div className="flex items-center justify-between gap-2">
-                        <p className="text-red-600 font-medium text-md">
-                          {displayINRCurrency(product?.productId?.sellingPrice)}
-                        </p>
-                        <p className="text-slate-600 font-semibold text-lg">
-                          {displayINRCurrency(
-                            product?.productId?.sellingPrice * product?.quantity
-                          )}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2 mt-1">
-                        <button
-                          className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center hover:bg-red-600 hover:text-white rounded"
-                          onClick={() =>
-                            handleDecreaseUpdateCartProductQuantity(
-                              product?._id,
-                              product?.quantity
-                            )
-                          }
-                        >
-                          -
-                        </button>
-                        <span>{product?.quantity}</span>
-                        <button
-                          className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center hover:bg-red-600 hover:text-white rounded"
-                          onClick={() =>
-                            handleIncreaseUpdateCartProductQuantity(
-                              product?._id,
-                              product?.quantity
-                            )
-                          }
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
+                    <MdDelete />
                   </div>
-                );
-              })}
+                  <h2
+                    title={product?.productId?.productName}
+                    className="text-md lg:text-lg text-ellipsis line-clamp-1"
+                  >
+                    {product?.productId?.productName}
+                  </h2>
+                  <p className="capitalize text-slate-500">
+                    {product?.productId?.category}
+                  </p>
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-red-600 font-medium text-md">
+                      {displayINRCurrency(product?.productId?.sellingPrice)}
+                    </p>
+                    <p className="text-slate-600 font-semibold text-lg">
+                      {displayINRCurrency(
+                        product?.productId?.sellingPrice * product?.quantity
+                      )}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 mt-1">
+                    <button
+                      className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center hover:bg-red-600 hover:text-white rounded"
+                      onClick={() =>
+                        handleDecreaseUpdateCartProductQuantity(
+                          product?._id,
+                          product?.quantity
+                        )
+                      }
+                    >
+                      -
+                    </button>
+                    <span>{product?.quantity}</span>
+                    <button
+                      className="border border-red-600 text-red-600 w-6 h-6 flex justify-center items-center hover:bg-red-600 hover:text-white rounded"
+                      onClick={() =>
+                        handleIncreaseUpdateCartProductQuantity(
+                          product?._id,
+                          product?.quantity
+                        )
+                      }
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* Total Product Price Summary */}
