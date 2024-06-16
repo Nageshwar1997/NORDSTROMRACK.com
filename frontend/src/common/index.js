@@ -2,6 +2,7 @@ import process from "../env";
 
 const backendDomain = process.env.REACT_APP_BACKEND_URL; // "http://localhost:8080";
 
+console.log("Backend Domain :", backendDomain);
 const SummaryApi = {
   signUp: {
     url: `${backendDomain}/api/signup`,
