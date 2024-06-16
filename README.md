@@ -1,6 +1,6 @@
 # NORDSTROMRACK.com
 
-# Frontend Installation
+## Frontend Installation
 
 ### Tailwind CSS
 
@@ -42,10 +42,9 @@ module.exports = {
 
 `npm install --save @stripe/react-stripe-js @stripe/stripe-js`
 
-
 <!-- Backend Installation -->
 
-# Backend Installation
+## Backend Installation
 
 ### Install Backend
 
