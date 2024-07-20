@@ -9,7 +9,6 @@ Discover a world of possibilities at NORDSTROMRACK, where luxury meets affordabi
 **Explore Our Diverse Categories:**
 
 - **Electronics Essentials:** From cutting-edge cameras and mobiles to sleek earphones and powerful processors, find the latest tech innovations tailored to your needs.
-<img src="https://images.pexels.com/photos/236047/pexels-photo-236047.jpeg?cs=srgb&dl=clouds-cloudy-countryside-236047.jpg&fm=jpg" />
 
 - **Home Appliances:** Explore our selection of refrigerators, printers, and TVs, designed to elevate your living space with style and functionality.
 
@@ -24,6 +23,12 @@ Discover a world of possibilities at NORDSTROMRACK, where luxury meets affordabi
 - **Competitive Pricing:** Enjoy everyday low prices and exclusive deals that fit your budget without compromising on style or performance.
 
 - **User-Friendly Experience:** Navigate our intuitive interface with ease, from browsing to checkout, and enjoy responsive design across all devices.
+
+## Features
+
+## Login & SignUp
+
+<img src="./readmeImages/SignUp.png" alt="SignUp" />
 
 **Join Our Community**
 
