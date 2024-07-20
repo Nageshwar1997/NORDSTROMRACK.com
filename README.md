@@ -26,9 +26,54 @@ Discover a world of possibilities at NORDSTROMRACK, where luxury meets affordabi
 
 ## Features
 
-## Login & SignUp
+### Login & SignUp Page
 
 <img src="./readmeImages/SignUp.png" alt="SignUp" />
+<img src="./readmeImages/login.png" alt="Login" />
+
+### Home Page
+
+<img src="./readmeImages/home.png" alt="Home Page" />
+
+### Product Details Page
+
+<img src="./readmeImages/details.png" alt="Home Page" />
+
+### Search Products Page
+
+<img src="./readmeImages/searchProducts.png" alt="Checkout" />
+
+### Cart Page
+
+<img src="./readmeImages/cart.png" alt="Cart" />
+
+### Payment & Checkout Page
+
+<img src="./readmeImages/payment.png" alt="Checkout" />
+
+### Admin Orders Page
+
+<img src="./readmeImages/adminAllOrders.png" alt="All Orders" />
+
+### Admin Products Page
+
+<img src="./readmeImages/adminAllProducts.png" alt="All Products" />
+
+### Admin Users Page
+
+<img src="./readmeImages/adminAllUsers.png" alt="All Users" />
+
+### Orders Page
+
+<img src="./readmeImages/userOrders.png" alt="Orders" />
+
+### Filter & Sort Products by Category wise & Price wise
+
+<img src="./readmeImages/filter_and_sort_categories.png" alt="Filter" />
+
+### Responsive Design for mobile
+
+<img src="./readmeImages/mobile.png" alt="Responsive" />
 
 **Join Our Community**
 
